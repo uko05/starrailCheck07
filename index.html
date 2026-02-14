@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="原神（げんしん）に対する色々な質問に回答して表を作れるサイトです。原神に対する自己紹介を画像1枚で説明が出来る画像として保存してみんなに共有できます！うーこの部屋では「推しキャラランキング」の他にも色々な機能があるから試してみてね！">
+
+    <title>#原神チェックシート - うーこの部屋</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="./favicon.ico">
+    <link rel="shortcut icon" href="./favicon.ico">
+
+    <!-- Favicon -->
+    <link rel="icon" href="public/scripts/favicon_io/favicon.ico" type="image/x-icon">
+    <link rel="icon" sizes="16x16" href="public/scripts/favicon_io/favicon-16x16.png">
+    <link rel="icon" sizes="32x32" href="public/scripts/favicon_io/favicon-32x32.png">
+    
+    <!-- Apple Touch Icon (for iOS) -->
+    <link rel="apple-touch-icon" href="public/scripts/favicon_io/apple-touch-icon.png">
+    
+    <!-- Android Icons (for Android devices) -->
+    <link rel="icon" sizes="192x192" href="public/scripts/favicon_io/android-chrome-192x192.png">
+    <link rel="icon" sizes="512x512" href="public/scripts/favicon_io/android-chrome-512x512.png">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-45FJ6EJT5X"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-45FJ6EJT5X');
+    </script>
+</head>
+<body>
+    <header>
+        <div class="lang-switch">
+          <label>
+            <input type="radio" name="lang" value="ja" checked>
+            日本語
+          </label>
+          <label>
+            <input type="radio" name="lang" value="en">
+            English
+          </label>
+        </div>
+
+        <div class="sticky-header">
+          <h1><button id="save-button">Save Image</button></h1>
+        </div>
+        <div>
+            <label>
+              <input type="radio" name="size-option" value="default" checked>
+              <span data-i18n="default">デフォルト</span>
+            </label>
+
+            <label>
+              <input type="radio" name="size-option" value="hakai">
+              <span data-i18n="hakai">左バー消滅</span>
+            </label>
+        </div>
+    </header>
+    
+     <!-- ----------------------------左ペイン------------------------------------------- -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="https://uko05.github.io/TopPage00/" class="sidebar-title">うーこの部屋</a> <!-- リンクを追加 -->
+                <button id="toggle-button" aria-expanded="true" aria-label="メニューを閉じる">☰</button>
+            </div>
+            <nav id="nav-links">
+                <ul>
+                    <li>
+                        <a href="#" class="parent-node">▼ 推しキャラランキング</a> <!-- デフォルトで表示 -->
+                        <ul class="child-nodes active"> <!-- デフォルトで表示 -->
+                            <li><a href="https://uko05.github.io/TiersList01/">　原神</a></li>
+                            <li><a href="https://uko05.github.io/TiersList02/">　スタレ【運命】</a></li>
+                            <li><a href="https://uko05.github.io/TiersList03/">　スタレ【属性】</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <a href="#" class="parent-node">▼ フリーフォーマット</a> <!-- デフォルトで表示 -->
+                        <ul class="child-nodes active"> <!-- デフォルトで表示 -->
+                            <li><a href="https://uko05.github.io/genshinFormat04/">　原神</a></li>
+                            <li><a href="https://uko05.github.io/starrailFormat05/">　スタレ</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <a href="#" class="parent-node">▼ チェックシート</a> <!-- デフォルトで表示 -->
+                        <ul class="child-nodes active"> <!-- デフォルトで表示 -->
+                            <li><a href="https://uko05.github.io/genshinCheck06/">　原神</a></li>
+                            <li><a href="https://uko05.github.io/starrailCheck07/">　スタレ</a></li>
+                        </ul>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </div>
+     <!-- ----------------------------左ペイン------------------------------------------- -->
+    <div class="tab-wrap">
+        <input id="TAB-01" type="radio" name="TAB" class="tab-switch" checked="checked" />
+        <label class="tab-label" for="TAB-01" data-category="version" data-i18n="q1">Q1.始めた時期は？</label>
+        <div class="tab-content">
+            <div class="image-list">
+                <!-- サムネイル画像をJavaScriptで追加します -->
+            </div>
+        </div>
+        
+        <input id="TAB-02" type="radio" name="TAB" class="tab-switch" />
+        <label class="tab-label" for="TAB-02" data-category="version" data-i18n="q2">Q2.好きなバージョンは？</label>
+        <div class="tab-content">
+            <div class="image-list">
+                <!-- サムネイル画像をJavaScriptで追加します -->
+            </div>
+        </div>
+        
+        <input id="TAB-03" type="radio" name="TAB" class="tab-switch" />
+        <label class="tab-label" for="TAB-03" data-category="chara" data-i18n="q3">Q3.推しキャラは？</label>
+        <div class="tab-content">
+            <div class="image-list">
+                <!-- サムネイル画像をJavaScriptで追加します -->
+            </div>
+        </div>
+        
+        <input id="TAB-04" type="radio" name="TAB" class="tab-switch" />
+        <label class="tab-label" for="TAB-04" data-category="chara" data-i18n="q4">Q4.髪型が似てるキャラは？</label>
+        <div class="tab-content">
+            <div class="image-list">
+                <!-- サムネイル画像をJavaScriptで追加します -->
+            </div>
+        </div>
+        
+        <input id="TAB-05" type="radio" name="TAB" class="tab-switch" />
+        <label class="tab-label" for="TAB-05" data-category="chara" data-i18n="q5">Q5.親友にするなら？</label>
+        <div class="tab-content">
+            <div class="image-list">
+                <!-- サムネイル画像をJavaScriptで追加します -->
+            </div>
+        </div>
+        
+        <input id="TAB-06" type="radio" name="TAB" class="tab-switch" />
+        <label class="tab-label" for="TAB-06" data-category="chara" data-i18n="q6">Q6.結婚するなら？</label>
+        <div class="tab-content">
+            <div class="image-list">
+                <!-- サムネイル画像をJavaScriptで追加します -->
+            </div>
+        </div>
+        
+        <input id="TAB-07" type="radio" name="TAB" class="tab-switch" />
+        <label class="tab-label" for="TAB-07" data-category="chara" data-i18n="q7">Q7.同じ声になれるなら？</label>
+        <div class="tab-content">
+            <div class="image-list">
+                <!-- サムネイル画像をJavaScriptで追加します -->
+            </div>
+        </div>
+        
+        <input id="TAB-08" type="radio" name="TAB" class="tab-switch" />
+        <label class="tab-label" for="TAB-08" data-category="chara" data-i18n="q8">Q8.１日入れ替わるなら？</label>
+        <div class="tab-content">
+            <div class="image-list">
+                <!-- サムネイル画像をJavaScriptで追加します -->
+            </div>
+        </div>
+        
+        <input id="TAB-09" type="radio" name="TAB" class="tab-switch" />
+        <label class="tab-label" for="TAB-09" data-category="chara" data-i18n="q9">Q9.着てみたいキャラの服装は？</label>
+        <div class="tab-content">
+            <div class="image-list">
+                <!-- サムネイル画像をJavaScriptで追加します -->
+            </div>
+        </div>
+        
+        <input id="TAB-10" type="radio" name="TAB" class="tab-switch" />
+        <label class="tab-label" for="TAB-10" data-category="chara" data-i18n="q10">Q10.同じ元素スキルを使えるなら？</label>
+        <div class="tab-content">
+            <div class="image-list">
+                <!-- サムネイル画像をJavaScriptで追加します -->
+            </div>
+        </div>
+        
+        <input id="TAB-11" type="radio" name="TAB" class="tab-switch" />
+        <label class="tab-label" for="TAB-11" data-category="chara" data-i18n="q11">Q11.最初に引いた星５は？(恒常除く)</label>
+        <div class="tab-content">
+            <div class="image-list">
+                <!-- サムネイル画像をJavaScriptで追加します -->
+            </div>
+        </div>
+        
+        <input id="TAB-12" type="radio" name="TAB" class="tab-switch" />
+        <label class="tab-label" for="TAB-12" data-category="chara" data-i18n="q12">Q12.一番欲しいキャラは？</label>
+        <div class="tab-content">
+            <div class="image-list">
+                <!-- サムネイル画像をJavaScriptで追加します -->
+            </div>
+        </div>
+    </div>
+
+    <div id="savearea">
+        <h1 data-i18n="title">#原神チェックシート</h1>
+        <div class="info-item-yoko">
+            <div class="label label-even" data-i18n="username">ユーザー名：</div>
+            <input id="playerName" class="value-yoko" type="text" placeholder="あなたの名前を書いてね！">
+        </div>
+        
+        <div class="container" id="grid">
+        <!-- 選択したキャラの画像・名前入力・説明入力 -->
+            <div class="entry" data-key="TAB-01">
+                <label data-i18n="q1">Q1.始めた時期は？</label>
+                <div class="imgheight">
+                    <img >
+                </div>
+                <textarea></textarea>
+                <div class="print-proxy" aria-hidden="true"></div>
+            </div>
+            
+            <div class="entry" data-key="TAB-02">
+                <label data-i18n="q2">Q2.好きなバージョンは？</label>
+                <div class="imgheight">
+                    <img >
+                </div>
+                <textarea></textarea>
+                <div class="print-proxy" aria-hidden="true"></div>
+            </div>
+            
+            <div class="entry" data-key="TAB-03">
+                <label data-i18n="q3">Q3.推しキャラは？</label>
+                <div class="imgheight">
+                    <img >
+                </div>
+                <textarea></textarea>
+                <div class="print-proxy" aria-hidden="true"></div>
+            </div>
+            
+            <div class="entry" data-key="TAB-04">
+                <label data-i18n="q4">Q4.髪型が似てるキャラは？</label>
+                <div class="imgheight">
+                    <img >
+                </div>
+                <textarea></textarea>
+                <div class="print-proxy" aria-hidden="true"></div>
+            </div>
+            
+            <div class="entry" data-key="TAB-05">
+                <label data-i18n="q5">Q5.親友にするなら？</label>
+                <div class="imgheight">
+                    <img >
+                </div>
+                <textarea></textarea>
+                <div class="print-proxy" aria-hidden="true"></div>
+            </div>
+            
+            <div class="entry" data-key="TAB-06">
+                <label data-i18n="q6">Q6.結婚するなら？</label>
+                <div class="imgheight">
+                    <img >
+                </div>
+                <textarea></textarea>
+                <div class="print-proxy" aria-hidden="true"></div>
+            </div>
+            
+            <div class="entry" data-key="TAB-07">
+                <label data-i18n="q7">Q7.同じ声になれるなら？</label>
+                <div class="imgheight">
+                    <img >
+                </div>
+                <textarea></textarea>
+                <div class="print-proxy" aria-hidden="true"></div>
+            </div>
+            
+            <div class="entry" data-key="TAB-08">
+                <label data-i18n="q8">Q8.１日入れ替わるなら？</label>
+                <div class="imgheight">
+                    <img >
+                </div>
+                <textarea></textarea>
+                <div class="print-proxy" aria-hidden="true"></div>
+            </div>
+            
+            <div class="entry" data-key="TAB-09">
+                <label data-i18n="q9">Q9.着てみたいキャラの服装は？</label>
+                <div class="imgheight">
+                    <img >
+                </div>
+                <textarea></textarea>
+                <div class="print-proxy" aria-hidden="true"></div>
+            </div>
+            
+            <div class="entry" data-key="TAB-10">
+                <label data-i18n="q10">Q10.同じ元素スキルを使えるなら？</label>
+                <div class="imgheight">
+                    <img >
+                </div>
+                <textarea></textarea>
+                <div class="print-proxy" aria-hidden="true"></div>
+            </div>
+            
+            <div class="entry" data-key="TAB-11">
+                <label data-i18n="q11">Q11.最初に引いた星５キャラは？(主人公除く)</label>
+                <div class="imgheight">
+                    <img >
+                </div>
+                <textarea></textarea>
+                <div class="print-proxy" aria-hidden="true"></div>
+            </div>
+            
+            <div class="entry" data-key="TAB-12">
+                <label data-i18n="q12">Q12.今一番欲しいキャラは？</label>
+                <div class="imgheight">
+                    <img >
+                </div>
+                <textarea></textarea>
+                <div class="print-proxy" aria-hidden="true"></div>
+            </div>
+            
+        </div>
+    </div>
+  
+    <a href="https://x.com/uko_dayo_" target="_blank">
+        <img src="chara/Image/twitter_image.png" alt="Twitter" class="twitter-icon">
+    </a>
+    <Label class="sad_label"> ＜友達ください…</Label>
+    
+    <div id="imagearea" class="container" style="display: none;">
+        <!--
+        <div id="imagearea" class="container" style="display: none;">
+         -->
+        <label class="sad_label_migi">Twitter:@uko_dayo_</label>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
