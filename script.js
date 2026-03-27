@@ -94,6 +94,7 @@ const imageData = [
     { src: 'syu1.png', category: 'chara' },  
     { src: 'sei1.png', category: 'chara' },
    
+    { src: 'version/4_1.png', category: 'version' },
     { src: 'version/4_0.png', category: 'version' },
     { src: 'version/3_8.png', category: 'version' },
     { src: 'version/3_7.png', category: 'version' },
