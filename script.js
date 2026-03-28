@@ -1,4 +1,5 @@
-const imageFolder = 'chara/';
+const imageFolder = 'https://cdn.jsdelivr.net/gh/uko05/99_SharedImage@main/02_Starrail/chara_full/';
+const versionFolder = 'https://cdn.jsdelivr.net/gh/uko05/99_SharedImage@main/02_Starrail/version/';
 const imageData = [
     { src: 'syu5.png', category: 'chara' },
     { src: 'sei5.png', category: 'chara' },
@@ -94,32 +95,32 @@ const imageData = [
     { src: 'syu1.png', category: 'chara' },  
     { src: 'sei1.png', category: 'chara' },
    
-    { src: 'version/4_1.png', category: 'version' },
-    { src: 'version/4_0.png', category: 'version' },
-    { src: 'version/3_8.png', category: 'version' },
-    { src: 'version/3_7.png', category: 'version' },
-    { src: 'version/3_6.png', category: 'version' },
-    { src: 'version/3_5.png', category: 'version' },
-    { src: 'version/3_4.png', category: 'version' },
-    { src: 'version/3_3.png', category: 'version' },
-    { src: 'version/3_2.png', category: 'version' },
-    { src: 'version/3_1.png', category: 'version' },
-    { src: 'version/3_0.png', category: 'version' },
-    { src: 'version/2_7.png', category: 'version' },
-    { src: 'version/2_6.png', category: 'version' },
-    { src: 'version/2_5.png', category: 'version' },
-    { src: 'version/2_4.png', category: 'version' },
-    { src: 'version/2_3.png', category: 'version' },
-    { src: 'version/2_2.png', category: 'version' },
-    { src: 'version/2_1.png', category: 'version' },
-    { src: 'version/2_0.png', category: 'version' },
-    { src: 'version/1_6.png', category: 'version' },
-    { src: 'version/1_5.png', category: 'version' },
-    { src: 'version/1_4.png', category: 'version' },
-    { src: 'version/1_3.png', category: 'version' },
-    { src: 'version/1_2.png', category: 'version' },
-    { src: 'version/1_1.png', category: 'version' },
-    { src: 'version/1_0.png', category: 'version' }
+    { src: '4_1.png', category: 'version' },
+    { src: '4_0.png', category: 'version' },
+    { src: '3_8.png', category: 'version' },
+    { src: '3_7.png', category: 'version' },
+    { src: '3_6.png', category: 'version' },
+    { src: '3_5.png', category: 'version' },
+    { src: '3_4.png', category: 'version' },
+    { src: '3_3.png', category: 'version' },
+    { src: '3_2.png', category: 'version' },
+    { src: '3_1.png', category: 'version' },
+    { src: '3_0.png', category: 'version' },
+    { src: '2_7.png', category: 'version' },
+    { src: '2_6.png', category: 'version' },
+    { src: '2_5.png', category: 'version' },
+    { src: '2_4.png', category: 'version' },
+    { src: '2_3.png', category: 'version' },
+    { src: '2_2.png', category: 'version' },
+    { src: '2_1.png', category: 'version' },
+    { src: '2_0.png', category: 'version' },
+    { src: '1_6.png', category: 'version' },
+    { src: '1_5.png', category: 'version' },
+    { src: '1_4.png', category: 'version' },
+    { src: '1_3.png', category: 'version' },
+    { src: '1_2.png', category: 'version' },
+    { src: '1_1.png', category: 'version' },
+    { src: '1_0.png', category: 'version' }
 ];
 
 const MAX_SELECTION = 1;
@@ -242,7 +243,7 @@ function loadImages() {
         wrap.classList.add('image-container');
 
         const img = document.createElement('img');
-        img.src = `${imageFolder}${imgData.src}`;
+        img.src = `${imgData.category === 'version' ? versionFolder : imageFolder}${imgData.src}`;
         img.dataset.src = imgData.src;
         img.dataset.category = imgData.category;
         img.classList.add('image-item');
@@ -253,7 +254,7 @@ function loadImages() {
       });
     }
     
-    function setSaveImage(tabKey, src) {
+    function setSaveImage(tabKey, src, category) {
       // 該当する保存枠を探す
       const entry = document.querySelector(`#savearea .entry[data-key="${tabKey}"]`);
       if (!entry) return;
@@ -262,7 +263,7 @@ function loadImages() {
       if (!img) return;
 
       if (src) {
-        img.src = `${imageFolder}${src}`;  // フォルダ＋ファイル名
+        img.src = `${category === 'version' ? versionFolder : imageFolder}${src}`;  // フォルダ＋ファイル名
         img.alt = src;
         img.dataset.src = src;
       } else {
@@ -310,8 +311,8 @@ function moveToNextTab(currentTabKey) {
 
       tabSelections[tabKey] = selected;
       
-      setSaveImage(tabKey, selected[0] || null);
-  
+      setSaveImage(tabKey, selected[0] || null, img.dataset.category);
+
       updateImageNumbers(tabKey, scopeEl);
     }
 
@@ -356,7 +357,7 @@ function moveToNextTab(currentTabKey) {
         }
       });
       updateImageNumbers(tabKey, scopeEl);
-      setSaveImage(tabKey, selected[0] || null);
+      setSaveImage(tabKey, selected[0] || null, category);
     }
 
     // 保存ボタンのクリックイベントを追加
