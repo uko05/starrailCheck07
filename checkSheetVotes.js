@@ -21,6 +21,9 @@ const QUESTION_LABELS = {
   'TAB-12': 'TAB-12_一番欲しいキャラは？',
 };
 
+const VOTE_COOLDOWN_MS = 60 * 60 * 1000; // 1時間
+const LAST_VOTE_KEY = 'starrailCheck_lastVoteTime';
+
 // checkSheetVotes/{questionId}/characters/{characterFile} = { count, updatedAt }
 async function incrementVote(questionId, characterFile) {
   const docId = QUESTION_LABELS[questionId] ?? questionId;
@@ -37,6 +40,9 @@ async function incrementVote(questionId, characterFile) {
 
 // tabSelections = { "TAB-03": ["キャラ.png"], ... }
 export async function submitVotes(tabSelections) {
+  const lastVote = localStorage.getItem(LAST_VOTE_KEY);
+  if (lastVote && Date.now() - Number(lastVote) < VOTE_COOLDOWN_MS) return;
+
   const promises = Object.entries(tabSelections)
     .filter(([, selected]) => selected.length > 0)
     .map(([questionId, selected]) => incrementVote(questionId, selected[0]));
@@ -45,4 +51,6 @@ export async function submitVotes(tabSelections) {
   results.forEach(r => {
     if (r.status === 'rejected') console.error("集計の書き込みに失敗", r.reason);
   });
+
+  localStorage.setItem(LAST_VOTE_KEY, Date.now());
 }
