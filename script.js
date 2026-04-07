@@ -1,4 +1,5 @@
 import { starrailChars, starrailVersions } from 'https://cdn.jsdelivr.net/gh/uko05/99_SharedImage@main/02_Starrail/chara_data/starrail_chars.js';
+import { submitVotes } from './checkSheetVotes.js';
 
 const imageFolder = 'https://cdn.jsdelivr.net/gh/uko05/99_SharedImage@main/02_Starrail/chara_full/';
 const versionFolder = 'https://cdn.jsdelivr.net/gh/uko05/99_SharedImage@main/02_Starrail/version/';
@@ -258,6 +259,8 @@ function moveToNextTab(currentTabKey) {
 async function saveImage() {
   const node = document.getElementById('savearea');
   if (!node) return;
+
+  submitVotes(tabSelections);
 
   // モバイル判定
   const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || navigator.maxTouchPoints > 0;
