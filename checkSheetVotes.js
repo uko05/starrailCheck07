@@ -24,10 +24,10 @@ const QUESTION_LABELS = {
 const VOTE_COOLDOWN_MS = 60 * 60 * 1000; // 1時間
 const LAST_VOTE_KEY = 'starrailCheck_lastVoteTime';
 
-// checkSheetVotes/{questionId}/characters/{characterFile} = { count, updatedAt }
+// checkSheetVotes07/{questionId}/characters/{characterFile} = { count, updatedAt }
 async function incrementVote(questionId, characterFile) {
   const docId = QUESTION_LABELS[questionId] ?? questionId;
-  const ref = doc(db, "checkSheetVotes", docId, "characters", characterFile);
+  const ref = doc(db, "checkSheetVotes07", docId, "characters", characterFile);
   await runTransaction(db, async (tx) => {
     const snap = await tx.get(ref);
     if (!snap.exists()) {
