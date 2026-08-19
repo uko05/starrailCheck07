@@ -1,5 +1,8 @@
 import { starrailChars, starrailVersions } from 'https://cdn.jsdelivr.net/gh/uko05/99_SharedImage@main/02_Starrail/chara_data/starrail_chars.js';
 import { submitVotes } from './checkSheetVotes.js';
+import {
+  onAccountAuthState, saveProfileImage, getSavedProfileImage, formatSavedAt,
+} from 'https://uko05.github.io/24_AccountCenter/saved-image.js';
 
 const imageFolder = 'https://cdn.jsdelivr.net/gh/uko05/99_SharedImage@main/02_Starrail/chara_full/';
 const versionFolder = 'https://cdn.jsdelivr.net/gh/uko05/99_SharedImage@main/02_Starrail/version/';
@@ -10,6 +13,36 @@ const imageData = [
 
 const MAX_SELECTION = 1;
 const SELECTED_LABEL = '☑';
+const SITE_ID = 'starrailCheck';
+let refreshSavedImageUI = () => {};
+
+// 「前回保存した画像を確認」トグルの初期化(アカウント登録者のみ表示)
+function initSavedImageUI() {
+  const wrap = document.getElementById('uko-saved-image-wrap');
+  const toggle = document.getElementById('uko-saved-image-toggle');
+  const panel = document.getElementById('uko-saved-image-panel');
+  const dateEl = document.getElementById('uko-saved-image-date');
+  const imgEl = document.getElementById('uko-saved-image-img');
+  if (!wrap || !toggle || !panel || !dateEl || !imgEl) return;
+
+  toggle.addEventListener('click', () => {
+    panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+  });
+
+  async function refresh() {
+    const entry = await getSavedProfileImage(SITE_ID);
+    if (entry) {
+      dateEl.textContent = formatSavedAt(entry.updatedAt);
+      imgEl.src = entry.url;
+      wrap.style.display = 'block';
+    } else {
+      wrap.style.display = 'none';
+      panel.style.display = 'none';
+    }
+  }
+  refreshSavedImageUI = refresh;
+  onAccountAuthState(() => { refresh(); });
+}
 
 // タブごとの選択状態を管理するためのオブジェクト
 const tabSelections = {};
@@ -19,6 +52,7 @@ const i18n = {
     default: "デフォルト",
     hakai: "左バー消滅",
     title: "#スタレチェックシート",
+    savedImageToggle: "前回保存した画像を確認",
     username: "ユーザー名:",
     q1: "Q1.始めた時期は？",
     q2: "Q2.好きなバージョンは？",
@@ -37,6 +71,7 @@ const i18n = {
     default: "Default",
     hakai: "Hide Left Bar",
     title: "#StarRail Check Sheet",
+    savedImageToggle: "Check last saved image",
     username: "Name:",
     q1:  "Q1.When did you start?",
     q2:  "Q2.Favorite version?",
@@ -284,6 +319,9 @@ async function saveImage() {
     const blob = await new Promise((res) => canvas.toBlob(res, 'image/png'));
     if (!blob) throw new Error('Blob 作成に失敗');
 
+    // アカウント登録者ならクラウドにも保存(失敗しても無視、ローカル保存は継続)
+    saveProfileImage(SITE_ID, blob).then(() => refreshSavedImageUI());
+
     // ファイル名：yyyyMMdd_HHmmss
     const now = new Date();
     const pad = (n) => String(n).padStart(2, '0');
@@ -332,8 +370,9 @@ async function saveImage() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    initLangSwitch(); 
+    initLangSwitch();
     loadImages();
+    initSavedImageUI();
     
     // 画像生成などでDOMが増えた後に、現在の言語でもう一度適用
     const currentLang =
