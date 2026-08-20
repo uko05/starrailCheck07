@@ -364,7 +364,7 @@ async function saveImage() {
   try {
     // キャプチャ
     const canvas = await html2canvas(node, { useCORS: true, scale: 2 });
-    const blob = await new Promise((res) => canvas.toBlob(res, 'image/png'));
+    const blob = await new Promise((res) => canvas.toBlob(res, 'image/jpeg', 0.92));
     if (!blob) throw new Error('Blob 作成に失敗');
 
     // アカウント登録者ならクラウドにも保存(失敗しても無視、ローカル保存は継続)
@@ -373,12 +373,12 @@ async function saveImage() {
     // ファイル名：yyyyMMdd_HHmmss
     const now = new Date();
     const pad = (n) => String(n).padStart(2, '0');
-    const filename = `スタレチェックシート_${now.getFullYear()}${pad(now.getMonth()+1)}${pad(now.getDate())}_${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}.png`;
+    const filename = `スタレチェックシート_${now.getFullYear()}${pad(now.getMonth()+1)}${pad(now.getDate())}_${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}.jpg`;
 
     if (isMobile) {
       // 共有シート優先
       try {
-        const file = new File([blob], filename, { type: 'image/png' });
+        const file = new File([blob], filename, { type: 'image/jpeg' });
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
           await navigator.share({
             files: [file],
