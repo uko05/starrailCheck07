@@ -443,7 +443,9 @@ async function saveImage() {
 
   try {
     // キャプチャ
-    const canvas = await html2canvas(node, { useCORS: true, scale: 2 });
+    // スマホの縦画面だとnodeの実際の横幅(PC想定の固定幅)よりビューポートが狭いため、
+    // windowWidthを指定しないとhtml2canvasが右側を切り落として撮ってしまう。
+    const canvas = await html2canvas(node, { useCORS: true, scale: 2, windowWidth: node.scrollWidth, windowHeight: node.scrollHeight });
     const blob = await new Promise((res) => canvas.toBlob(res, 'image/jpeg', 0.92));
     if (!blob) throw new Error('Blob 作成に失敗');
 
